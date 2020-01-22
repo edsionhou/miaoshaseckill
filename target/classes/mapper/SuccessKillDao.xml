@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.sec.dao.SuccessKillDao">
+	<!-- 如果出现主键冲突，报错,所以 ignore
+		如果重复插入，就返回0，插入0行 -->
+	<insert id="insertSuccessKill">
+	insert ignore into success_killed(seckill_id,user_phone,state)
+	values(#{seckillId},#{userPhone},0)
+	
+	</insert>
+
+	<select id="queryByIdWithSeckill" resultType="SuccessKill">
+	<!-- 根据id查询successKill并携带秒杀产品对象实体 -->	
+	<!-- 可以自由控制SQL -->
+		select  
+		sk.seckill_id,
+		sk.user_phone,
+		sk.create_time,
+		sk.state,
+		s.seckill_id "seckill.seckill_id",
+		s.name "seckill.name2",
+		s.number "seckill.number",
+		s.start_time "seckill.start_time",
+		s.end_time "seckill.end_time",
+		s.create_time "seckill.create_time"
+		
+		from success_killed sk
+		inner join seckill s on sk.seckill_id=s.seckill_id
+		where sk.seckill_id=#{seckillId} and sk.user_phone=#{userPhone}
+		<!-- 
+		/**
+	 * SuccessKill [seckillId=1000, userPhone=1305469999, state=-1, createTime=Sat Jan 18 17:31:53 CST 2020, 
+	 * seckill=Seckill 
+	 * [seckillId=0, name=1000元秒杀iphone 11 ,
+	 *  number=0, 
+	 *  startTime=null, 
+	 *  endTime=null,
+	 *   createTime=null]]
+	 */ -->
+	
+	
+	
+	
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
