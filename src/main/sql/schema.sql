@@ -35,3 +35,6 @@ mysql -uroot -p123456
 alter table seckill
 drop index idx_create_time,
 add index idx_c_s(start_time,create_time);
+
+
+--明日sql优化试一下
